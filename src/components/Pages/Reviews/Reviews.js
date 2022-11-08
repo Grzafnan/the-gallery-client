@@ -1,5 +1,7 @@
+import axios from 'axios';
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Reviews = () => {
@@ -8,7 +10,7 @@ const Reviews = () => {
   const { user } = useContext(AuthContext);
   // console.log(id);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const form = event.target;
@@ -17,8 +19,40 @@ const Reviews = () => {
     const photoUrl = form.photoUrl.value;
     const message = form.message.value;
 
-    // console.log(name, email, photoUrl, message);
+    const date = new Date();
+    const time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
+    // console.log(name, email, photoUrl, message);
+    const review = {
+      name,
+      email,
+      photoUrl,
+      reviewDate: new Date().toDateString(),
+      reviewTime: time,
+      message
+    }
+
+    // console.log(review);
+
+    if (name) {
+      axios.post(`http://localhost:5000/review`, review, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("aceessToken")}`,
+        },
+      })
+        .then(res => {
+          if (res.data?.insertedId) {
+            toast.success("Review added successfully", { autoClose: 1000 });
+            event.target.reset();
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+    else {
+      toast.error(`Provide Valid Information`);
+    }
 
   }
 
@@ -170,7 +204,7 @@ const Reviews = () => {
 
                     <div className="-space-y-px rounded-lg bg-white shadow-sm">
                       <div className=''>
-                        <textarea id="about" name="message" required className="w-full bg-transparent border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 resize-none placeholder-gray-500 text-gray-500 dark:text-gray-400" placeholder="Let the world know who you are" rows={5} defaultValue={""} />
+                        <textarea id="about" name="message" required className="w-full bg-transparent border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-base focus:outline-none focus:border-indigo-700 resize-none placeholder-gray-500 text-gray-500 dark:text-gray-400" placeholder="Let the world know who you are" rows={5} defaultValue={""} />
                       </div>
 
 
