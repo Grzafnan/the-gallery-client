@@ -30,7 +30,7 @@ const Login = () => {
           navigate(from, { replace: true });
         }
         else {
-          toast.error('Your email in not verified!');
+          toast.error('You are not verified!');
         }
         // ...
       })
@@ -51,6 +51,7 @@ const Login = () => {
         // The signed-in user info.
         const user = result.user;
         console.log(user);
+        toast.success('Login Success')
         navigate(from, { replace: true });
         // ...
       }).catch((error) => {
@@ -70,8 +71,10 @@ const Login = () => {
       .then((result) => {
         // The signed-in user info.
         const user = result.user;
+        toast.success('Login Success')
         navigate(from, { replace: true });
         console.log(user);
+
         //...
       })
       .catch((error) => {

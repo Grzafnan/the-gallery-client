@@ -59,7 +59,8 @@ const Register = () => {
         // The signed-in user info.
         const user = result.user;
         // console.log(user);
-        toast.success('Login Success')
+        toast.success('Register Success')
+        navigate('/');
         // ...
       }).catch((error) => {
         // Handle Errors here.
@@ -74,8 +75,9 @@ const Register = () => {
       .then((result) => {
         // The signed-in user info.
         const user = result.user;
-        toast.success('Login Success')
+        toast.success('Register Success')
         // console.log(user);
+        navigate('/');
         //...
       })
       .catch((error) => {
