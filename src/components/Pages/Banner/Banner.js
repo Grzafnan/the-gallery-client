@@ -16,9 +16,9 @@ const Banner = () => {
   SwiperCore.use([Autoplay])
   return (
     <>
-      <Swiper autoplay={{ delay: 3000 }} navigation={true} modules={[Navigation]} className="mySwiper px-6">
+      <Swiper autoplay={{ delay: 3000 }} navigation={true} modules={[Navigation]} className="mySwiper">
         <SwiperSlide className="relative">
-          <img className="w-full lg:p-5" src={image1} alt="" />
+          <img className="w-full " src={image1} alt="" />
           <div className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-center">
             <h3 className="md:text-4xl lg:text-6xl text-gray-100 font-bold font-serif">
               Wedding in Dhaka
@@ -32,7 +32,7 @@ const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide className="relative">
-          <img className="w-full lg:p-5" src={image2} alt="" />
+          <img className="w-full " src={image2} alt="" />
           <div className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-center">
             <h3 className="md:text-4xl lg:text-6xl text-gray-100 font-bold font-serif">
               My Personal Work
@@ -46,7 +46,7 @@ const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide className="relative">
-          <img className="w-full lg:p-5" src={image3} alt="" />
+          <img className="w-full " src={image3} alt="" />
           <div className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-center">
             <h3 className="md:text-4xl lg:text-6xl text-gray-100 font-bold font-serif">
               Discover My Portfolio
