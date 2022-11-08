@@ -15,16 +15,24 @@ const Header = () => {
   const menu = <>
     <NavLink to='/home' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
 
-    }> Home</NavLink>
+    }>
+      Home
+    </NavLink>
+
     <NavLink to='/services' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
 
-    }> Services</NavLink>
+    }>
+      Services
+    </NavLink>
+
     <NavLink to='/blog' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
 
-    }> Blog</NavLink>
+    }>
+      Blog
+    </NavLink>
 
     {
-      user?.uid && user?.email ? <>
+      user && user?.uid ? <>
         <NavLink to='/my-reviews' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
 
         }> My Reviews</NavLink>
