@@ -1,14 +1,15 @@
 import axios from 'axios';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import { MdOutlineRateReview } from "react-icons/md";
 
 const Reviews = () => {
   const { id } = useParams();
-
   const { user } = useContext(AuthContext);
-  // console.log(id);
+  const [reviews, setReviews] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,17 +23,15 @@ const Reviews = () => {
     const date = new Date();
     const time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
-    // console.log(name, email, photoUrl, message);
     const review = {
       name,
       email,
       photoUrl,
+      serviceId: id,
       reviewDate: new Date().toDateString(),
       reviewTime: time,
       message
     }
-
-    // console.log(review);
 
     if (name) {
       axios.post(`http://localhost:5000/review`, review, {
@@ -44,6 +43,7 @@ const Reviews = () => {
           if (res.data?.insertedId) {
             toast.success("Review added successfully", { autoClose: 1000 });
             event.target.reset();
+            setRefresh(!refresh);
           }
         })
         .catch(err => {
@@ -53,8 +53,22 @@ const Reviews = () => {
     else {
       toast.error(`Provide Valid Information`);
     }
+  };
 
-  }
+  useEffect(() => {
+    axios.get(`http://localhost:5000/review/${id}`)
+      .then(res => {
+        if (res.data.success) {
+          setReviews(res.data.data);
+        }
+        else {
+          toast.error(`Could not get review for ${id}`);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [id, refresh])
 
 
 
@@ -66,73 +80,54 @@ const Reviews = () => {
             <div className="bg-gray-50 py-12 md:py-24">
               <div className="mx-auto max-w-lg px-4 lg:px-8">
                 <div className="flex items-center">
-                  <span className="h-10 w-10 rounded-full bg-blue-900"></span>
-                  <h2 className="ml-4 font-medium">Reviews</h2>
+                  {/* <span className="h-10 w-10 rounded-full bg-green-700">
+                  </span> */}
+                  <MdOutlineRateReview className="h-10 w-10" />
+                  <h2 className="ml-2 text-xl font-semibold">Client Reviews</h2>
                 </div>
 
                 <div className="mt-12">
                   <div className="flow-root">
                     <ul className="-my-4 divide-y divide-gray-200">
-                      <li className="flex items-center justify-between py-4">
-                        <div className="flex items-start">
-                          <img
-                            alt="Trainer"
-                            src="https://images.unsplash.com/photo-1565299999261-28ba859019bb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-                            className="h-16 w-16 flex-shrink-0 rounded-lg object-cover"
-                          />
 
-                          <div className="ml-4">
-                            <p className="text-base">Vibrant Trainers</p>
+                      {
+                        reviews.length > 0 ? <>
+                          {
+                            reviews?.map(review => (<li key={review._id} className="flex items-center justify-between py-4">
+                              <div className="flex items-start">
+                                <img
+                                  alt="Trainer"
+                                  src={review?.photoUrl}
+                                  className="h-16 w-16 flex-shrink-0 rounded-lg object-cover"
+                                />
 
-                            <dl className="mt-1 space-y-1 text-xs text-gray-500">
-                              <div>
-                                <dt className="inline">Color:</dt>
-                                <dd className="inline">Blue</dd>
+                                <div className="ml-4">
+                                  <p className="text-base">
+                                    {review?.name}
+                                  </p>
+                                  <dl className="mt-1 space-y-1 text-xs text-gray-600">
+                                    <div>
+                                      <p>
+                                        {review?.message.slice(0, 100)}
+                                      </p>
+                                    </div>
+                                  </dl>
+                                </div>
                               </div>
+                            </li>)
+                            )
+                          }
+                        </>
+                          :
+                          <li className="flex items-center justify-between py-4">
+                            <div className="flex justify-center w-full">
+                              <p className='text-lg font-semibold text-center bg-gray-200 py-2 w-full rounded'>
+                                No Reviews Available.
+                              </p>
+                            </div>
+                          </li>
+                      }
 
-                              <div>
-                                <dt className="inline">Size:</dt>
-                                <dd className="inline">UK 10</dd>
-                              </div>
-                            </dl>
-                          </div>
-                        </div>
-
-                        <div>
-                          <p className="text-base">
-                            $49.99
-                            <small className="text-gray-500">x1</small>
-                          </p>
-                        </div>
-                      </li>
-
-                      <li className="flex items-center justify-between py-4">
-                        <div className="flex items-start">
-                          <img
-                            alt="Lettuce"
-                            src="https://images.unsplash.com/photo-1640958904159-51ae08bd3412?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1771&q=80"
-                            className="h-16 w-16 flex-shrink-0 rounded-lg object-cover"
-                          />
-
-                          <div className="ml-4">
-                            <p className="text-base">Lettuce</p>
-
-                            <dl className="mt-1 space-y-1 text-xs text-gray-500">
-                              <div>
-                                <dt className="inline">Size:</dt>
-                                <dd className="inline">Big</dd>
-                              </div>
-                            </dl>
-                          </div>
-                        </div>
-
-                        <div>
-                          <p className="text-base">
-                            $25
-                            <small className="text-gray-500">x2</small>
-                          </p>
-                        </div>
-                      </li>
                     </ul>
                   </div>
                 </div>
