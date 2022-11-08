@@ -2,6 +2,7 @@ import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Login = () => {
@@ -24,7 +25,7 @@ const Login = () => {
         // Signed in 
         const user = userCredential.user;
         console.log(user);
-        if (user.emailVerified) {
+        if (user?.uid) {
 
           navigate(from, { replace: true });
         }
@@ -59,7 +60,7 @@ const Login = () => {
         console.error(errorMessage);
       })
       .finally(() => {
-        // setLoading(false)
+        setLoading(false)
       })
   }
 
@@ -85,7 +86,7 @@ const Login = () => {
   return (
     <>
       <div className="flex flex-col absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full max-w-md px-4 py-8 bg-white rounded-lg shadow-2xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
-        <div className="self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl dark:text-white">
+        <div className="self-center mb-6 text-xl font-semibold text-gray-600 sm:text-2xl dark:text-white">
           Login To Your Account
         </div>
         <div className="flex gap-4 item-center">
@@ -117,7 +118,7 @@ const Login = () => {
                     </path>
                   </svg>
                 </span>
-                <input type="email" name='email' id="sign-in-email" className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Your email" />
+                <input type="email" name='email' id="sign-in-email" className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring--600 focus:border-transparent" placeholder="Your email" />
               </div>
             </div>
             <div className="flex flex-col mb-6">
@@ -128,7 +129,7 @@ const Login = () => {
                     </path>
                   </svg>
                 </span>
-                <input type="password" name='password' id="sign-in-email" className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Your password" />
+                <input type="password" name='password' id="sign-in-email" className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring--600 focus:border-transparent" placeholder="Your password" />
               </div>
             </div>
             <div className="flex items-center mb-6 -mt-4">
@@ -139,7 +140,7 @@ const Login = () => {
               </div>
             </div>
             <div className="flex w-full">
-              <button type="submit" className="py-2 px-4  bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+              <button type="submit" className="py-2 px-4  bg-gray-600 hover:bg-gray-700 focus:ring--500 focus:ring-offset--200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                 Login
               </button>
             </div>

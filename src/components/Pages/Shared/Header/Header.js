@@ -8,16 +8,8 @@ import { Link, NavLink } from 'react-router-dom';
 
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
-  // console.log(user);
-
-  const navigation = [
-    { name: 'Home', to: '/home', },
-    { name: 'Services', to: '/services' },
-    { name: 'Blog', to: '/blog' },
-    { name: 'My Reviews', to: '/my-reviews' },
-    { name: 'Add Service', to: '/add-service' },
-  ]
+  const { user, logOut } = useContext(AuthContext);
+  console.log(user);
 
 
   const menu = <>
@@ -30,16 +22,23 @@ const Header = () => {
     <NavLink to='/blog' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
 
     }> Blog</NavLink>
-    <NavLink to='/my-reviews' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
 
-    }> My Reviews</NavLink>
+    {
+      user?.uid && user?.email ? <>
+        <NavLink to='/my-reviews' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
 
-    <NavLink to='/add-service' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
+        }> My Reviews</NavLink>
 
-    }> Add Service</NavLink>
-    <NavLink to='/login' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
+        <NavLink to='/add-service' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
 
-    }> Log in </NavLink>
+        }> Add Service</NavLink>
+      </>
+        :
+        <NavLink to='/login' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
+
+        }> Log in </NavLink>
+    }
+
   </>
 
 
@@ -48,7 +47,6 @@ const Header = () => {
     return classes.filter(Boolean).join(' ')
   }
 
-  console.log(classNames());
   return (
     <>
 
@@ -98,8 +96,9 @@ const Header = () => {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
+                          src={user?.uid ? user?.photoURL : 'https://static.vecteezy.com/system/resources/thumbnails/002/275/847/small/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg'}
+                          alt=" "
+                          title={user?.uid ? user?.displayName : 'No name'}
                         />
                       </Menu.Button>
                     </div>
@@ -136,15 +135,13 @@ const Header = () => {
                           )}
                         </Menu.Item>
                         <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="/"
-                              alt='Sign Out'
-                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                            >
-                              Sign out
-                            </a>
-                          )}
+
+                          <button onClick={logOut}
+                            className='px-4 py-2 text-sm text-gray-700'
+                          >
+                            Sign out
+                          </button>
+
                         </Menu.Item>
                       </Menu.Items>
                     </Transition>
