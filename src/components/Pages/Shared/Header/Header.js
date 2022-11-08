@@ -12,12 +12,31 @@ const Header = () => {
   // console.log(user);
 
   const navigation = [
-    { name: 'Home', to: '/home' },
+    { name: 'Home', to: '/home', },
     { name: 'Services', to: '/services' },
     { name: 'Blog', to: '/blog' },
     { name: 'My Reviews', to: '/my-reviews' },
     { name: 'Add Service', to: '/add-service' },
   ]
+
+
+  const menu = <>
+    <NavLink to='/home' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
+
+    }> Home</NavLink>
+    <NavLink to='/services' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
+
+    }> Services</NavLink>
+    <NavLink to='/blog' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
+
+    }> Blog</NavLink>
+    <NavLink to='/my-reviews' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
+
+    }> My Reviews</NavLink>
+    <NavLink to='/add-service' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
+
+    }> Add Service</NavLink>
+  </>
 
 
 
@@ -62,18 +81,7 @@ const Header = () => {
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
-                      {navigation.map((item, idx) => (
-                        <NavLink
-                          key={idx}
-                          to={item.to}
-                          className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium'
-
-                          }
-                          aria-current={item.current ? 'page' : undefined}
-                        >
-                          {item.name}
-                        </NavLink>
-                      ))}
+                      {menu}
                     </div>
                   </div>
                 </div>
@@ -143,20 +151,11 @@ const Header = () => {
 
             <Disclosure.Panel className="sm:hidden">
               <div className="space-y-1 px-2 pt-2 pb-3">
-                {navigation.map((item, idx) => (
-                  <Link to={item.to} key={idx}>
-                    <button
-                      className={classNames(
-                        item.current ? 'bg-gray-900 text-white' : 'text-gray-900 hover:bg-gray-700 hover:text-white',
-                        'block px-3 py-2 rounded-md text-base font-medium w-full text-start'
-                      )}
-                      aria-current={item.current ? 'page' : undefined}
-                    >
-                      {item.name}
-                    </button>
 
-                  </Link>
-                ))}
+                {
+                  menu
+                }
+
               </div>
             </Disclosure.Panel>
           </>
