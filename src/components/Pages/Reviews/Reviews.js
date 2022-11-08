@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { MdOutlineRateReview } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 const Reviews = () => {
   const { id } = useParams();
@@ -89,7 +90,6 @@ const Reviews = () => {
                 <div className="mt-12">
                   <div className="flow-root">
                     <ul className="-my-4 divide-y divide-gray-200">
-
                       {
                         reviews.length > 0 ? <>
                           {
@@ -134,88 +134,106 @@ const Reviews = () => {
               </div>
             </div>
 
-            <div className="bg-white py-12 md:py-24">
-              <div className="mx-auto max-w-lg px-4 lg:px-8">
-                <form onSubmit={handleSubmit} className="grid grid-cols-6 gap-4">
-                  <div className="col-span-3">
-                    <label className="mb-1 block text-base text-gray-600" htmlFor="first_name">
-                      Name
-                    </label>
+            {
+              user?.email ?
+                <>
+                  <div className="bg-white py-12 md:py-24">
+                    <div className="mx-auto max-w-lg px-4 lg:px-8">
+                      <form onSubmit={handleSubmit} className="grid grid-cols-6 gap-4">
+                        <div className="col-span-3">
+                          <label className="mb-1 block text-base text-gray-600" htmlFor="firstName">
+                            Name
+                          </label>
 
-                    <input
-                      className="w-full rounded-lg border-gray-200 p-2.5 text-base shadow-sm"
-                      type="text"
-                      name='firstName'
-                      id="first_name"
-                      required
-                    />
+                          <input
+                            className="w-full rounded-lg border-gray-200 p-2.5 text-base shadow-sm"
+                            type="text"
+                            name='firstName'
+                            id="firstName"
+                            required
+                          />
+                        </div>
+
+                        <div className="col-span-3">
+                          <label className="mb-1 block text-base text-gray-600" name='lastName' htmlFor="last_name">
+                            Last Name
+                          </label>
+
+                          <input
+                            className="w-full rounded-lg border-gray-200 p-2.5 text-base shadow-sm"
+                            type="text"
+                            name='lastName'
+                            id="last_name"
+                          />
+                        </div>
+
+                        <div className="col-span-6">
+                          <label className="mb-1 block text-base text-gray-600" htmlFor="email">
+                            Email
+                          </label>
+
+                          <input
+                            className="w-full rounded-lg border-gray-200 p-2.5 text-base shadow-sm"
+                            type="email"
+                            id="email"
+                            name='email'
+                            defaultValue={user?.email}
+                            readOnly
+                          />
+                        </div>
+
+                        <div className="col-span-6">
+                          <label className="mb-1 block text-base text-gray-600" htmlFor="photoUrl">
+                            PhotoUrl
+                          </label>
+
+                          <input
+                            className="w-full rounded-lg border-gray-200 p-2.5 text-base shadow-sm"
+                            type="text"
+                            name='photoUrl'
+                            id="photoUrl"
+                          />
+                        </div>
+
+                        <fieldset className="col-span-6">
+                          <legend className="mb-1 block text-base text-gray-600">
+                            Write A Review
+                          </legend>
+
+                          <div className="-space-y-px rounded-lg bg-white shadow-sm">
+                            <div className=''>
+                              <textarea id="about" name="message" required className="w-full bg-transparent border rounded-lg border-gray-200 pl-3 py-3 shadow-sm text-base focus:outline-none focus:border-indigo-700 resize-none placeholder-gray-500 text-gray-500 dark:text-gray-400" placeholder="Let write a review" rows={5} defaultValue={""} />
+                            </div>
+
+                          </div>
+                        </fieldset>
+                        <div className="col-span-6">
+                          <button
+                            className="block w-full rounded-lg hover:bg-gray-900 transition-all ease-in-out bg-gray-800 p-2.5 text-md font-semibold text-white"
+                            type="submit"
+                          >
+                            Add Review
+                          </button>
+                        </div>
+                      </form>
+                    </div>
                   </div>
-
-                  <div className="col-span-3">
-                    <label className="mb-1 block text-base text-gray-600" name='last_name' htmlFor="last_name">
-                      Last Name
-                    </label>
-
-                    <input
-                      className="w-full rounded-lg border-gray-200 p-2.5 text-base shadow-sm"
-                      type="text"
-                      name='lastName'
-                      id="last_name"
-                    />
-                  </div>
-
-                  <div className="col-span-6">
-                    <label className="mb-1 block text-base text-gray-600" htmlFor="email">
-                      Email
-                    </label>
-
-                    <input
-                      className="w-full rounded-lg border-gray-200 p-2.5 text-base shadow-sm"
-                      type="email"
-                      id="email"
-                      name='email'
-                      defaultValue={user?.email}
-                      readOnly
-                    />
-                  </div>
-
-                  <div className="col-span-6">
-                    <label className="mb-1 block text-base text-gray-600" htmlFor="photoUrl">
-                      PhotoUrl
-                    </label>
-
-                    <input
-                      className="w-full rounded-lg border-gray-200 p-2.5 text-base shadow-sm"
-                      type="text"
-                      name='photoUrl'
-                      id="photoUrl"
-                    />
-                  </div>
-
-                  <fieldset className="col-span-6">
-                    <legend className="mb-1 block text-base text-gray-600">
-                      Write A Review
-                    </legend>
-
-                    <div className="-space-y-px rounded-lg bg-white shadow-sm">
-                      <div className=''>
-                        <textarea id="about" name="message" required className="w-full bg-transparent border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-base focus:outline-none focus:border-indigo-700 resize-none placeholder-gray-500 text-gray-500 dark:text-gray-400" placeholder="Let the world know who you are" rows={5} defaultValue={""} />
-                      </div>
-
+                </>
+                :
+                <>
+                  <div className='h-full bg-gray-50 py-12 md:py-24'>
+                    <div className="flex flex-col items-center justify-center h-full">
+                      <h3 className='text-xl bg-gray-200 py-2 px-4 rounded font-semibold mb-12'> If you want to add a review, Please Log in first. </h3>
+                      <Link to='/login'>
+                        <button className='bg-gray-800 hover:bg-gray-900 text-base text-white font-semibold py-2 px-6 rounded transition-all ease-in-out'>
+                          Log in
+                        </button>
+                      </Link>
 
                     </div>
-                  </fieldset>
-                  <div className="col-span-6">
-                    <button
-                      className="block w-full rounded-lg hover:bg-gray-900 transition-all ease-in-out bg-gray-800 p-2.5 text-md font-semibold text-white"
-                      type="submit"
-                    >
-                      Add Review
-                    </button>
                   </div>
-                </form>
-              </div>
-            </div>
+                </>
+            }
           </div>
         </div>
       </section>
