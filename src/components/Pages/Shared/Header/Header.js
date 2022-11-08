@@ -33,9 +33,13 @@ const Header = () => {
     <NavLink to='/my-reviews' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
 
     }> My Reviews</NavLink>
+
     <NavLink to='/add-service' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
 
     }> Add Service</NavLink>
+    <NavLink to='/login' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
+
+    }> Log in </NavLink>
   </>
 
 
