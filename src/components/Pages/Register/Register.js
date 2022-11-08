@@ -1,6 +1,6 @@
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
@@ -8,13 +8,12 @@ const Register = () => {
   const {
     createUser,
     updateProfileName,
-    verifyEmail,
     signInWithProvider
   } = useContext(AuthContext);
 
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
-
+  const navigate = useNavigate();
 
   const handelRegister = (e) => {
     e.preventDefault();
@@ -30,12 +29,12 @@ const Register = () => {
         // Signed in 
         const user = userCredential.user;
         updateName();
-        verify();
-        console.log(user);
+        toast.success('Register Success')
+        // console.log(user);
+        navigate('/');
         // ...
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         console.error(errorMessage);
         // ..
@@ -51,16 +50,6 @@ const Register = () => {
           // ...
         });
     }
-
-
-    const verify = () => {
-      verifyEmail()
-        .then(() => {
-          // Email verification sent!
-          toast.success('Email verification sent! Please check your inbox and verify!!')
-          // ...
-        });
-    }
   }
 
 
@@ -70,10 +59,10 @@ const Register = () => {
         // The signed-in user info.
         const user = result.user;
         // console.log(user);
+        toast.success('Login Success')
         // ...
       }).catch((error) => {
         // Handle Errors here.
-        const errorCode = error.code;
         const errorMessage = error.message;
         console.error(errorMessage);
       });
@@ -85,7 +74,8 @@ const Register = () => {
       .then((result) => {
         // The signed-in user info.
         const user = result.user;
-        console.log(user);
+        toast.success('Login Success')
+        // console.log(user);
         //...
       })
       .catch((error) => {
