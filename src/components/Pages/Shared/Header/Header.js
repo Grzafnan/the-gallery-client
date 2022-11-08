@@ -9,7 +9,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
 
 
   const menu = <>
