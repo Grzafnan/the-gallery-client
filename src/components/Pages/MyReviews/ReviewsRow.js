@@ -1,12 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 const ReviewsRow = ({ idx, review, handleDelete }) => {
 
   const { _id, email, message, photoUrl, reviewDate, reviewTime, serviceId, name } = review;
-
-
-
-
 
 
 
@@ -25,7 +22,7 @@ const ReviewsRow = ({ idx, review, handleDelete }) => {
         <td className=" px-4 py-2 text-gray-700">
           {email}
         </td>
-        <td className=" px-4 py-2 text-gray-700">
+        <td className=" px-4 py-2 w-1/4 text-gray-700">
           <p>
             {/* {message.length > 60 ? message.slice(0, 60) + '...' : message} */}
             {message}
@@ -37,25 +34,27 @@ const ReviewsRow = ({ idx, review, handleDelete }) => {
             <span
               className="inline-flex divide-x overflow-hidden rounded-md border bg-white shadow-sm"
             >
-              <button
-                className="inline-block bg-green-100 p-3 text-gray-700 hover:bg-green-200 focus:relative"
-                title="Edit Product"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="h-4 w-4"
+              <Link to={`/edit-review/${_id}`}>
+                <button
+                  className="inline-block bg-green-100 p-3 text-gray-700 hover:bg-green-200 focus:relative"
+                  title="Edit Product"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                  />
-                </svg>
-              </button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="h-4 w-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                    />
+                  </svg>
+                </button>
+              </Link>
 
               <button
                 onClick={() => handleDelete(_id)}

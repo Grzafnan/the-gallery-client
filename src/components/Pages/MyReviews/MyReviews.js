@@ -3,11 +3,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import ReviewsRow from './ReviewsRow';
+import Swal from 'sweetalert2'
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
+  const [editReview, setEditReview] = useState({});
   const [refresh, setRefresh] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   // console.log(reviews);
 
   useEffect(() => {
@@ -19,29 +22,36 @@ const MyReviews = () => {
 
 
   const handleDelete = (id) => {
-    console.log(id);
-    const proceed = window.confirm('Are you sure, want to delete this review?');
-
-    if (proceed) {
-      axios.delete(`http://localhost:5000/my-review/${id}`)
-        .then((res) => {
-          if (res.data.success) {
-            toast.success(res.data.message, { autoClose: 1000 });
-            setRefresh(!refresh);
-          } else {
-            toast.error(res.data.error);
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        })
-
-    }
-  }
-
-
-
-
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to delete the review!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`http://localhost:5000/my-review/${id}`)
+          .then((res) => {
+            if (res.data.success) {
+              Swal.fire(
+                'Deleted!',
+                'Successfully deleted the review.',
+                'success'
+              )
+              setRefresh(!refresh);
+            } else {
+              toast.error(res.data.error);
+            }
+          })
+          .catch(err => {
+            // console.log(err);
+            toast.error(err)
+          });
+      };
+    });
+  };
 
 
   return (

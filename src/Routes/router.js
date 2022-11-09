@@ -9,6 +9,7 @@ import AddService from "../components/Pages/AddService/AddService";
 import Login from "../components/Pages/Login/Login";
 import Register from "../components/Pages/Register/Register";
 import ServiceDetails from "../components/Pages/Services/ServiceDetails";
+import EditReview from "../components/Pages/EditReview.js/EditReview";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
       {
         path: '/my-reviews',
         element: <MyReviews />,
+      },
+      {
+        path: '/edit-review/:id',
+        element: <EditReview />
       },
       {
         path: '/add-service',

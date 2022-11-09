@@ -46,6 +46,9 @@ const Reviews = () => {
             event.target.reset();
             setRefresh(!refresh);
           }
+          else {
+            toast.error("Can't added review.", { autoClose: 1000 });
+          }
         })
         .catch(err => {
           console.log(err);
@@ -86,7 +89,6 @@ const Reviews = () => {
                   <MdOutlineRateReview className="h-10 w-10" />
                   <h2 className="ml-2 text-xl font-semibold">Client Reviews</h2>
                 </div>
-
                 <div className="mt-12">
                   <div className="flow-root">
                     <ul className="-my-4 divide-y divide-gray-200">
@@ -108,7 +110,7 @@ const Reviews = () => {
                                   <dl className="mt-1 space-y-1 text-xs text-gray-600">
                                     <div>
                                       <p>
-                                        {review?.message.slice(0, 100)}
+                                        {review?.message.length > 100 ? review?.message.slice(0, 100) + '...' : review?.message}
                                       </p>
                                     </div>
                                   </dl>
