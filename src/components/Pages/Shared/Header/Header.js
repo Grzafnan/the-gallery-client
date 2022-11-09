@@ -58,10 +58,10 @@ const Header = () => {
   return (
     <>
 
-      <Disclosure as="nav" className="">
+      <Disclosure as="nav" className="sticky top-0 z-40">
         {({ open }) => (
           <>
-            <div className="mx-auto max-w-full px-2 sm:px-6 lg:px-14 border-b-[2px]">
+            <div className="mx-auto max-w-full px-2 sm:px-6 shadow-lg lg:px-14 bg-gray-100">
               <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
@@ -173,7 +173,7 @@ const Header = () => {
               </div>
             </div>
 
-            <Disclosure.Panel className="sm:hidden">
+            <Disclosure.Panel className="sm:hidden z-50 bg-gray-200">
               <div className="space-y-1 px-2 pt-2 pb-3">
 
                 {
@@ -182,6 +182,7 @@ const Header = () => {
 
               </div>
             </Disclosure.Panel>
+            <hr className='h-[2px] bg-gradient-to-r from-pink-600 to-blue-500' />
           </>
         )}
       </Disclosure>

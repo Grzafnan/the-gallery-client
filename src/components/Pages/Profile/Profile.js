@@ -2,16 +2,17 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import image1 from '../../../assets/profile-user-card.json'
 import Lottie from 'lottie-react';
+import useTitle from '../../../hooks/useTitle';
 
 
 const Profile = () => {
-
   const { user } = useContext(AuthContext);
+  useTitle('Profile');
 
   return (
     <div>
-      <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
-        <div id="profile" className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg:mx-0">
+      <div className="max-w-4xl flex items-center h-auto mx-auto my-20">
+        <div id="profile" className="w-3/4 mx-auto rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-xl bg-gray-200">
           <div className="p-4 md:p-12 text-center z-10">
 
             <div className=" rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center border-2 border-red-600"
@@ -53,11 +54,9 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <div className="w-full lg:w-2/5">
-
+        {/* <div className="w-full lg:w-2/5">
           <Lottie className='md:w-2/4 md:mx-auto lg:min-w-[600px]' animationData={image1} loop={true} />
-
-        </div>
+        </div> */}
 
       </div>
     </div>

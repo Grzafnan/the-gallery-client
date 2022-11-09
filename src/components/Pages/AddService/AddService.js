@@ -6,12 +6,14 @@ import image from '../../../assets/service.json'
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import Loader from '../Utilities/Loader';
+import useTitle from '../../../hooks/useTitle';
 
 
 const AddService = () => {
   const [ratings, setRatings] = useState(null);
   const { loading } = useContext(AuthContext);
 
+  useTitle('Add Service')
 
   const navigate = useNavigate();
   const defaultOptions = {

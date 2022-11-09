@@ -5,20 +5,22 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import ReviewsRow from './ReviewsRow';
 import Swal from 'sweetalert2'
 import Loader from '../Utilities/Loader';
+import useTitle from '../../../hooks/useTitle';
 
 
 const MyReviews = () => {
   const { user, logOut } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
   const [refresh, setRefresh] = useState(false);
-
   const [loading, setLoading] = useState(false);
+
+  useTitle('My Reviews');
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, []);
 
 

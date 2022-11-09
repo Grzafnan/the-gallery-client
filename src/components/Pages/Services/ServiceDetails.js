@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import useTitle from '../../../hooks/useTitle';
 import Reviews from '../Reviews/Reviews';
 
 const ServiceDetails = () => {
@@ -9,6 +10,7 @@ const ServiceDetails = () => {
   const [service, setService] = useState({});
   const { reviewCount } = useContext(AuthContext);
 
+  useTitle('Service Detail')
 
   useEffect(() => {
     axios.get(`http://localhost:5000/service/${id}`)

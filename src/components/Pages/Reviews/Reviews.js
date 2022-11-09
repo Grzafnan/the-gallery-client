@@ -73,7 +73,7 @@ const Reviews = () => {
       .catch(err => {
         console.log(err);
       })
-  }, [id, refresh])
+  }, [id, setReviewCount, refresh])
 
 
 

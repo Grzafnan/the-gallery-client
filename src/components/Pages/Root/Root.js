@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import useTitle from '../../../hooks/useTitle';
 import Banner from '../Banner/Banner';
 import FollowUs from '../FollowUs/FollowUs';
 import HomeAbout from '../HomeAbout/HomeAbout';
 import HomeServices from '../HomeServices/HomeServices';
 import NewsLetter from '../NewsLetter/NewsLetter';
-import Footer from '../Shared/Footer/Footer';
 import Loader from '../Utilities/Loader';
 
 
@@ -16,9 +16,10 @@ const Root = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, []);
 
+  useTitle('Home');
 
   return (
     <>
@@ -33,7 +34,6 @@ const Root = () => {
               <HomeServices />
               <NewsLetter />
               <FollowUs />
-              <Footer />
             </>
           )
       }
