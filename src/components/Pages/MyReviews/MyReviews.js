@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import ReviewsRow from './ReviewsRow';
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
+  const [refresh, setRefresh] = useState(false);
   // console.log(reviews);
 
   useEffect(() => {
@@ -13,8 +15,29 @@ const MyReviews = () => {
       .then(res => {
         setReviews(res.data.data);
       })
-  }, [user?.email]);
+  }, [user?.email, refresh]);
 
+
+  const handleDelete = (id) => {
+    console.log(id);
+    const proceed = window.confirm('Are you sure, want to delete this review?');
+
+    if (proceed) {
+      axios.delete(`http://localhost:5000/my-review/${id}`)
+        .then((res) => {
+          if (res.data.success) {
+            toast.success(res.data.message, { autoClose: 1000 });
+            setRefresh(!refresh);
+          } else {
+            toast.error(res.data.error);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
+
+    }
+  }
 
 
 
@@ -108,6 +131,7 @@ const MyReviews = () => {
                       key={idx}
                       review={review}
                       idx={idx}
+                      handleDelete={handleDelete}
                     />)
                   }
                 </>

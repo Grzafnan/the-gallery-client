@@ -1,8 +1,9 @@
 import React from 'react';
 
-const ReviewsRow = ({ idx, review }) => {
+const ReviewsRow = ({ idx, review, handleDelete }) => {
 
   const { _id, email, message, photoUrl, reviewDate, reviewTime, serviceId, name } = review;
+
 
 
 
@@ -32,14 +33,7 @@ const ReviewsRow = ({ idx, review }) => {
         </td>
         <td className=" px-4 py-2">
           {/* flex max-h-full justify-center items-center */}
-          <div className='flex max-h-full justify-center items-center '>
-            {/* <button className='rounded bg-red-100 px-3 py-1.5 text-xs font-medium text-red-700 mr-2'>
-              Edit
-            </button>
-            <button className='rounded bg-red-100 px-3 py-1.5 text-xs font-medium text-red-700'>
-              Delete
-            </button> */}
-
+          <div className='flex justify-center items-center'>
             <span
               className="inline-flex divide-x overflow-hidden rounded-md border bg-white shadow-sm"
             >
@@ -64,6 +58,7 @@ const ReviewsRow = ({ idx, review }) => {
               </button>
 
               <button
+                onClick={() => handleDelete(_id)}
                 className="inline-block p-3 bg-red-100 text-gray-700 hover:bg-red-200 focus:relative"
                 title="Delete Product"
               >
