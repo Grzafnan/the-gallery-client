@@ -10,6 +10,7 @@ const ReviewsRow = ({ idx, review, handleDelete }) => {
 
   return (
     <>
+
       <tr className=''>
         <td className="sticky inset-y-0 left-0 bg-white px-4 py-2">
           <strong>
@@ -81,6 +82,7 @@ const ReviewsRow = ({ idx, review, handleDelete }) => {
           </div>
         </td>
       </tr>
+
     </>
   );
 };

@@ -61,7 +61,7 @@ const Header = () => {
       <Disclosure as="nav" className="">
         {({ open }) => (
           <>
-            <div className="mx-auto max-w-full px-2 sm:px-6 lg:px-14 shadow-lg">
+            <div className="mx-auto max-w-full px-2 sm:px-6 lg:px-14 border-b-[2px]">
               <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
@@ -144,11 +144,26 @@ const Header = () => {
                         </Menu.Item>
                         <Menu.Item>
 
-                          <button onClick={logOut}
-                            className='px-4 py-2 text-sm text-gray-700'
-                          >
-                            Sign out
-                          </button>
+                          {
+                            user?.email ? <>
+                              <button onClick={logOut}
+                                className='px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 w-full text-start'
+                              >
+                                Sign out
+                              </button>
+                            </>
+                              :
+                              <>
+                                <Link to='/login'>
+                                  <button
+                                    className='px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 w-full text-start'
+                                  >
+                                    Sign in
+                                  </button>
+                                </Link>
+
+                              </>
+                          }
 
                         </Menu.Item>
                       </Menu.Items>

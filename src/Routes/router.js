@@ -11,6 +11,7 @@ import Register from "../components/Pages/Register/Register";
 import ServiceDetails from "../components/Pages/Services/ServiceDetails";
 import EditReview from "../components/Pages/EditReview.js/EditReview";
 import PrivateRoutes from "./PrivateRoutes";
+import Profile from "../components/Pages/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register />
+      },
+      {
+        path: '/profile',
+        element: <Profile />
       }
     ]
 

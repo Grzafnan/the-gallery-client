@@ -7,6 +7,7 @@ import NewsLetter from '../NewsLetter/NewsLetter';
 import Footer from '../Shared/Footer/Footer';
 import Loader from '../Utilities/Loader';
 
+
 const Root = () => {
 
   const [loading, setLoading] = useState(false);
