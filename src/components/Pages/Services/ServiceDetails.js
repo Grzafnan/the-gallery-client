@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider';
 import Reviews from '../Reviews/Reviews';
 
 const ServiceDetails = () => {
   const { id } = useParams();
   const [service, setService] = useState({});
+  const { reviewCount } = useContext(AuthContext);
 
 
   useEffect(() => {
@@ -29,7 +31,7 @@ const ServiceDetails = () => {
                     Ratings: {service?.ratings}/Star
                   </p>
                 </div>
-                <p className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 font-normal text-base leading-4 text-gray-700 hover:underline hover:text-gray-800 duration-100 cursor-pointer">22 reviews</p>
+                <p className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 font-normal text-base leading-4 text-gray-700 hover:underline hover:text-gray-800 duration-100 cursor-pointer">{reviewCount > 0 ? reviewCount : "No"} reviews</p>
               </div>
 
               <p className=" font-normal text-base leading-6 text-gray-600 mt-7">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using. Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>

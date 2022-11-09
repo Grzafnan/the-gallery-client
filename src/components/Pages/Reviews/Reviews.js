@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const Reviews = () => {
   const { id } = useParams();
-  const { user } = useContext(AuthContext);
+  const { user, setReviewCount } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
@@ -62,8 +62,9 @@ const Reviews = () => {
   useEffect(() => {
     axios.get(`http://localhost:5000/review/${id}`)
       .then(res => {
-        if (res.data.success) {
+        if (res?.data?.success) {
           setReviews(res.data.data);
+          setReviewCount(res?.data?.data?.length);
         }
         else {
           toast.error(`Could not get review for ${id}`);

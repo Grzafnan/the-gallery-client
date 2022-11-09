@@ -9,11 +9,11 @@ const PrivateRoutes = ({ children }) => {
   const location = useLocation();
 
   if (loading) {
-    <Loader />
+    return <Loader />
   }
 
 
-  if (user && user?.id) {
+  if (user && user?.uid) {
     return children;
   }
 

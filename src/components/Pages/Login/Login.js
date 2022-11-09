@@ -24,14 +24,14 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log(user);
         if (user?.uid) {
-
           navigate(from, { replace: true });
+          toast.success('Log in Success');
         }
         else {
           toast.error('You are not verified!');
         }
+
         // ...
       })
       .catch((error) => {
