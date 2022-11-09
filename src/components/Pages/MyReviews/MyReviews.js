@@ -8,7 +8,7 @@ import Loader from '../Utilities/Loader';
 
 
 const MyReviews = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
@@ -23,15 +23,34 @@ const MyReviews = () => {
 
 
 
-
-
   useEffect(() => {
-    axios.get(`http://localhost:5000/my-reviews?email=${user?.email}`)
-      .then(res => {
-        setReviews(res.data.data);
+    if (!user?.email) return;
 
+    fetch(`http://localhost:5000/my-reviews?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('aceessToken')}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          logOut();
+        }
+        return res.json();
       })
-  }, [user?.email, refresh]);
+      .then((data) => {
+        // console.log(data.data);
+        setReviews(data.data)
+      });
+  }, [user?.email, logOut, refresh]);
+
+
+
+
+
+
+
+
+
 
 
   const handleDelete = (id) => {

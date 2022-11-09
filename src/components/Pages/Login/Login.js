@@ -1,9 +1,11 @@
+import axios from 'axios';
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import { jwtVerify } from '../Shared/JwtVerify/JwtVerify';
 
 const Login = () => {
 
@@ -24,16 +26,16 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        if (user?.uid) {
-          navigate(from, { replace: true });
-          toast.success('Log in Success');
-        }
-        else {
-          toast.error('You are not verified!');
-        }
-
-        // ...
+        const currentUser = {
+          email: user.email
+        };
+        jwtVerify(currentUser)
+        toast.success('Log in Success', { autoClose: 1000 });
+        navigate(from, { replace: true });
       })
+
+
+      // ...
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -51,6 +53,10 @@ const Login = () => {
         // The signed-in user info.
         const user = result.user;
         console.log(user);
+        const currentUser = {
+          email: user.email
+        };
+        jwtVerify(currentUser)
         toast.success('Login Success')
         navigate(from, { replace: true });
         // ...
@@ -71,6 +77,10 @@ const Login = () => {
       .then((result) => {
         // The signed-in user info.
         const user = result.user;
+        const currentUser = {
+          email: user.email
+        };
+        jwtVerify(currentUser)
         toast.success('Login Success')
         navigate(from, { replace: true });
         console.log(user);

@@ -37,6 +37,7 @@ const AuthProvider = ({ children }) => {
   }
 
   const logOut = () => {
+    localStorage.removeItem('aceessToken')
     setLoading(true)
     return signOut(auth)
   }

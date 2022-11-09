@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import { jwtVerify } from '../Shared/JwtVerify/JwtVerify';
 
 const Register = () => {
   const {
@@ -29,8 +30,11 @@ const Register = () => {
         // Signed in 
         const user = userCredential.user;
         updateName();
+        const currentUser = {
+          email: user.email
+        };
+        jwtVerify(currentUser)
         toast.success('Register Success')
-        // console.log(user);
         navigate('/');
         // ...
       })
@@ -59,6 +63,10 @@ const Register = () => {
         // The signed-in user info.
         const user = result.user;
         // console.log(user);
+        const currentUser = {
+          email: user.email
+        };
+        jwtVerify(currentUser)
         toast.success('Register Success')
         navigate('/');
         // ...
@@ -75,6 +83,10 @@ const Register = () => {
       .then((result) => {
         // The signed-in user info.
         const user = result.user;
+        const currentUser = {
+          email: user.email
+        };
+        jwtVerify(currentUser)
         toast.success('Register Success')
         // console.log(user);
         navigate('/');

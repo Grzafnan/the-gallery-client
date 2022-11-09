@@ -145,7 +145,7 @@ const Header = () => {
                         <Menu.Item>
 
                           {
-                            user?.email ? <>
+                            user && user?.uid ? <>
                               <button onClick={logOut}
                                 className='px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 w-full text-start'
                               >
