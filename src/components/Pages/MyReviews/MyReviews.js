@@ -25,7 +25,7 @@ const MyReviews = () => {
     <>
 
       <div className="overflow-hidden overflow-x-auto rounded-lg border border-gray-200">
-        <table className="min-w-full divide-y divide-gray-200 text-sm">
+        <table className="min-w-full table-auto divide-y divide-gray-200 text-sm">
           <thead className="bg-gray-100">
             <tr>
               <th className="sticky inset-y-0 left-0 bg-gray-100 px-4 py-2 text-left">
