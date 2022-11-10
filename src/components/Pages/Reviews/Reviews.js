@@ -62,6 +62,7 @@ const Reviews = ({ serviceName }) => {
       .then(res => {
         if (res?.data?.success) {
           setReviews(res.data.data);
+          console.log(res);
           setReviewCount(res?.data?.data?.length);
         }
         else {
