@@ -138,7 +138,7 @@ const Header = () => {
                           <NavLink
                             to="#"
                             alt='Settings'
-                            className={({ isActive }) => isActive ? 'hover:bg-gray-200 bg-gray-200 my-1 block px-4 py-2 text-sm text-gray-900 rounded-md' : ' hover:bg-gray-200 block px-4 py-2 text-sm text-gray-900 rounded-md my-1'}
+                            className={({ isActive }) => isActive ? 'hover:bg-gray-200 my-1 block px-4 py-2 text-sm text-gray-900 rounded-md' : ' hover:bg-gray-200 block px-4 py-2 text-sm text-gray-900 rounded-md my-1'}
                           >
                             {
                               user?.email ? user.email : 'No User Email'

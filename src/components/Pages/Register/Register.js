@@ -45,10 +45,10 @@ const Register = () => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        updateName();
         const currentUser = {
           email: user.email
         };
+        updateName();
         jwtVerify(currentUser)
         toast.success('Register Success', { autoClose: 500 })
         navigate('/');
@@ -57,8 +57,10 @@ const Register = () => {
       .catch((error) => {
         const errorMessage = error.message;
         console.error(errorMessage);
+        toast.error(errorMessage, { autoClose: 500 });
         // ..
-      });
+      })
+
 
     const updateName = () => {
       updateProfileName(name)
@@ -90,7 +92,8 @@ const Register = () => {
         // Handle Errors here.
         const errorMessage = error.message;
         console.error(errorMessage);
-      });
+      })
+
   }
 
 
