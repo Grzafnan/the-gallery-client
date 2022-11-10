@@ -55,6 +55,7 @@ const Login = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error(errorMessage);
+        toast.error(errorMessage, { autoClose: 500 });
       })
       .finally(() => {
         setLoading(false)
@@ -80,6 +81,7 @@ const Login = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error(errorMessage);
+        toast.error(errorMessage, { autoClose: 500 });
       })
       .finally(() => {
         setLoading(false)
@@ -104,6 +106,7 @@ const Login = () => {
       })
       .catch((error) => {
         console.error(error.message);
+        toast.error(error.message, { autoClose: 500 });
       })
       .finally(() => {
         setLoading(false)
