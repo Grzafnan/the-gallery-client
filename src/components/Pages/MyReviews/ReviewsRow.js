@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 
 const ReviewsRow = ({ idx, review, handleDelete }) => {
 
-  const { _id, email, message, photoUrl, reviewDate, reviewTime, serviceId, name } = review;
+  const { _id, email, message, photoUrl, reviewDate, serviceId, serviceName, name } = review;
 
+  console.log(review);
 
 
 
@@ -18,10 +19,10 @@ const ReviewsRow = ({ idx, review, handleDelete }) => {
           </strong>
         </td>
         <td className=" px-4 py-2 font-medium text-gray-900">
-          {_id}
+          {serviceName}
         </td>
         <td className=" px-4 py-2 text-gray-700">
-          {email}
+          {reviewDate}
         </td>
         <td className=" px-4 py-2 w-1/4 text-gray-700">
           <p>

@@ -20,15 +20,14 @@ const MyReviews = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 1000);
   }, []);
-
 
 
   useEffect(() => {
     if (!user?.email) return;
-
-    fetch(`http://localhost:5000/my-reviews?email=${user?.email}`, {
+    setLoading(true);
+    fetch(`https://the-gallery-server.vercel.app/my-reviews?email=${user?.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('aceessToken')}`,
       },
@@ -41,21 +40,15 @@ const MyReviews = () => {
       })
       .then((data) => {
         // console.log(data.data);
-        setReviews(data.data)
+        setReviews(data.data);
+        setLoading(false);
       });
-  }, [user?.email, logOut, refresh]);
-
-
-
-
-
-
-
-
+  }, [user?.email, logOut, refresh])
 
 
 
   const handleDelete = (id) => {
+    console.log(id);
     Swal.fire({
       title: 'Are you sure?',
       text: "You want to delete the review!",
@@ -66,7 +59,11 @@ const MyReviews = () => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/my-review/${id}`)
+        axios.delete(`https://the-gallery-server.vercel.app/my-review/${id}`, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("aceessToken")}`,
+          },
+        })
           .then((res) => {
             if (res.data.success) {
               Swal.fire(
@@ -76,7 +73,7 @@ const MyReviews = () => {
               )
               setRefresh(!refresh);
             } else {
-              toast.error(res.data.error);
+              toast.error("cant delete review");
             }
           })
           .catch(err => {
@@ -97,7 +94,7 @@ const MyReviews = () => {
         )
           :
           (
-            <div className="overflow-hidden w-full overflow-x-auto rounded-lg border border-gray-200">
+            <div className="overflow-hidden w-full overflow-x-auto rounded-lg border border-gray-200 my-4">
               <table className="min-w-full table-auto divide-y divide-gray-200 text-sm">
                 <thead className="bg-gray-100">
                   <tr>
@@ -108,7 +105,7 @@ const MyReviews = () => {
                       className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
                     >
                       <div className="flex items-center gap-2">
-                        ID
+                        Service Name
 
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +125,7 @@ const MyReviews = () => {
                       className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
                     >
                       <div className="flex items-center gap-2">
-                        Email
+                        Date
 
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -165,9 +162,9 @@ const MyReviews = () => {
                       </div>
                     </th>
                     <th
-                      className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+                      className="whitespace-nowrap px-4 py-2 text-center font-medium text-gray-900"
                     >
-                      Status
+                      Action
                     </th>
                   </tr>
                 </thead>

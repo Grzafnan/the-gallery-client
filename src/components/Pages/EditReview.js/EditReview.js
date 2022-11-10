@@ -10,8 +10,14 @@ const EditReview = () => {
   const navigate = useNavigate();
   // console.log(id);
 
+  // console.log(review);
+
   useEffect(() => {
-    axios.get(`http://localhost:5000/my-review/${id}`)
+    axios.get(`https://the-gallery-server.vercel.app/my-review/${id}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("aceessToken")}`,
+      },
+    })
       .then(res => {
         if (res.data.success) {
           setReview(res.data.data)
@@ -27,7 +33,7 @@ const EditReview = () => {
       message
     }
 
-    axios.put(`http://localhost:5000/my-review/${id}`,
+    axios.put(`https://the-gallery-server.vercel.app/my-review/${id}`,
       status
       , {
         headers: {

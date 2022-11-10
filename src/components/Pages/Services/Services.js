@@ -16,13 +16,17 @@ const Services = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 1000);
   }, []);
 
 
   useEffect(() => {
-    axios.get('http://localhost:5000/services')
-      .then(res => setServices(res.data.data))
+    setLoading(true)
+    axios.get('https://the-gallery-server.vercel.app/services')
+      .then(res => {
+        setServices(res.data.data);
+        setLoading(false);
+      })
       .catch(err => console.log(err));
   }, [])
 
@@ -34,8 +38,8 @@ const Services = () => {
         )
           : (
             <div className=" 2xl:container 2xl:mx-auto">
-              <div className=" py-6 lg:px-20 md:px-6 px-4">
-                <div className=" grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-y-12 lg:gap-x-8 sm:gap-y-10 sm:gap-x-6 gap-y-6 lg:mt-12 mt-10">
+              <div className=" pt-6 pb-16 lg:px-20 md:px-6 px-4">
+                <div className=" grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-y-12 lg:gap-x-8 sm:gap-y-10 sm:gap-x-6 gap-y-6">
                   {
                     services.map(service => <ServiceCard
                       key={service._id}
@@ -47,6 +51,8 @@ const Services = () => {
             </div>
           )
       }
+
+
     </>
   );
 };

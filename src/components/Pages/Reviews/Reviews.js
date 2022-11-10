@@ -6,7 +6,7 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import { MdOutlineRateReview } from "react-icons/md";
 import { Link } from 'react-router-dom';
 
-const Reviews = () => {
+const Reviews = ({ serviceName }) => {
   const { id } = useParams();
   const { user, setReviewCount } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
@@ -21,21 +21,19 @@ const Reviews = () => {
     const photoUrl = form.photoUrl.value;
     const message = form.message.value;
 
-    const date = new Date();
-    const time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
     const review = {
       name,
       email,
       photoUrl,
       serviceId: id,
-      reviewDate: new Date().toDateString(),
-      reviewTime: time,
+      serviceName: serviceName,
+      reviewDate: new Date().toLocaleString(),
       message
     }
 
     if (name) {
-      axios.post(`http://localhost:5000/review`, review, {
+      axios.post(`https://the-gallery-server.vercel.app/review`, review, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("aceessToken")}`,
         },
@@ -60,7 +58,7 @@ const Reviews = () => {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/review/${id}`)
+    axios.get(`https://the-gallery-server.vercel.app/review/${id}`)
       .then(res => {
         if (res?.data?.success) {
           setReviews(res.data.data);
@@ -75,15 +73,15 @@ const Reviews = () => {
       })
   }, [id, setReviewCount, refresh])
 
-
+  // console.log(reviews);
 
   return (
     <>
       <section className='py-10'>
         <div className="relative mx-auto max-w-screen-2xl">
-          <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="bg-gray-50 py-12 md:py-24">
-              <div className="mx-auto max-w-lg px-4 lg:px-8">
+              <div className=" px-4 lg:px-8">
                 <div className="flex items-center">
                   {/* <span className="h-10 w-10 rounded-full bg-green-700">
                   </span> */}
@@ -92,32 +90,30 @@ const Reviews = () => {
                 </div>
                 <div className="mt-12">
                   <div className="flow-root">
-                    <ul className="-my-4 divide-y divide-gray-200">
+                    <ul className="-my-4 ">
                       {
                         reviews.length > 0 ? <>
                           {
-                            reviews?.map(review => (<li key={review._id} className="flex items-center justify-between py-4">
-                              <div className="flex items-start">
-                                <img
-                                  alt="Trainer"
-                                  src={review?.photoUrl}
-                                  className="h-16 w-16 flex-shrink-0 rounded-lg object-cover"
-                                />
-
-                                <div className="ml-4">
-                                  <p className="text-base">
-                                    {review?.name}
-                                  </p>
-                                  <dl className="mt-1 space-y-1 text-xs text-gray-600">
-                                    <div>
-                                      <p>
+                            reviews?.map(review => (
+                              <li key={review._id} className="flex items-center justify-between py-4">
+                                <div className="bg-white w-full shadow rounded p-4 xl:p-8">
+                                  <img src="https://cdn.tuk.dev/assets/components/26May-update/quote.png" aria-hidden="true" />
+                                  <div className="pl-4 pt-4 flex items-start justify-between">
+                                    <div className="mr-6">
+                                      <p className=" text-gray-700">
                                         {review?.message.length > 100 ? review?.message.slice(0, 100) + '...' : review?.message}
                                       </p>
+                                      <p className="mt-4 text-base font-semibold leading-none text-gray-800">{review?.name}</p>
+                                      <p className='text-xs py-1'>
+                                        {review?.reviewDate}
+                                      </p>
                                     </div>
-                                  </dl>
+                                    <img src={review?.photoUrl} className='w-16 rounded-full' alt={review?.name} role="img" />
+                                  </div>
                                 </div>
-                              </div>
-                            </li>)
+
+
+                              </li>)
                             )
                           }
                         </>
@@ -140,16 +136,17 @@ const Reviews = () => {
             {
               user?.email ?
                 <>
-                  <div className="bg-white py-12 md:py-24">
-                    <div className="mx-auto max-w-lg px-4 lg:px-8">
+                  <div className="bg-white shadow-sm py-12 mx-4 md:py-24">
+                    <div className="mx-auto md:w-3/4 lg:max-w-lg px-4 lg:px-8">
+                      <h2 className='text-xl font-semibold mb-4'>Add a Review</h2>
                       <form onSubmit={handleSubmit} className="grid grid-cols-6 gap-4">
                         <div className="col-span-3">
-                          <label className="mb-1 block text-base text-gray-600" htmlFor="firstName">
+                          <label className="mb-1 block text-base text-gray-700" htmlFor="firstName">
                             Name
                           </label>
 
                           <input
-                            className="w-full rounded-lg border-gray-200 p-2.5 text-base shadow-sm"
+                            className="w-full rounded-lg border-gray-400 p-2.5 text-base shadow-sm"
                             type="text"
                             name='firstName'
                             id="firstName"
@@ -158,12 +155,12 @@ const Reviews = () => {
                         </div>
 
                         <div className="col-span-3">
-                          <label className="mb-1 block text-base text-gray-600" name='lastName' htmlFor="last_name">
+                          <label className="mb-1 block text-base text-gray-700" name='lastName' htmlFor="last_name">
                             Last Name
                           </label>
 
                           <input
-                            className="w-full rounded-lg border-gray-200 p-2.5 text-base shadow-sm"
+                            className="w-full rounded-lg border-gray-400 p-2.5 text-base shadow-sm"
                             type="text"
                             name='lastName'
                             id="last_name"
@@ -171,12 +168,12 @@ const Reviews = () => {
                         </div>
 
                         <div className="col-span-6">
-                          <label className="mb-1 block text-base text-gray-600" htmlFor="email">
+                          <label className="mb-1 block text-base text-gray-700" htmlFor="email">
                             Email
                           </label>
 
                           <input
-                            className="w-full rounded-lg border-gray-200 p-2.5 text-base shadow-sm"
+                            className="w-full rounded-lg border-gray-400 p-2.5 text-base shadow-sm"
                             type="email"
                             id="email"
                             name='email'
@@ -186,12 +183,12 @@ const Reviews = () => {
                         </div>
 
                         <div className="col-span-6">
-                          <label className="mb-1 block text-base text-gray-600" htmlFor="photoUrl">
+                          <label className="mb-1 block text-base text-gray-700" htmlFor="photoUrl">
                             PhotoUrl
                           </label>
 
                           <input
-                            className="w-full rounded-lg border-gray-200 p-2.5 text-base shadow-sm"
+                            className="w-full rounded-lg border-gray-400 p-2.5 text-base shadow-sm"
                             type="text"
                             name='photoUrl'
                             id="photoUrl"
@@ -199,13 +196,13 @@ const Reviews = () => {
                         </div>
 
                         <fieldset className="col-span-6">
-                          <legend className="mb-1 block text-base text-gray-600">
+                          <legend className="mb-1 block text-base text-gray-700">
                             Write A Review
                           </legend>
 
                           <div className="-space-y-px rounded-lg bg-white shadow-sm">
                             <div className=''>
-                              <textarea id="about" name="message" required className="w-full bg-transparent border rounded-lg border-gray-200 pl-3 py-3 shadow-sm text-base focus:outline-none focus:border-indigo-700 resize-none placeholder-gray-500 text-gray-500 dark:text-gray-400" placeholder="Let write a review" rows={5} defaultValue={""} />
+                              <textarea id="about" name="message" required className="w-full bg-transparent border rounded-lg border-gray-400 pl-3 py-3 shadow-sm text-base focus:outline-none focus:border-indigo-700 resize-none placeholder-gray-500 text-gray-500 dark:text-gray-400" placeholder="Let's write a review" rows={5} defaultValue={""} />
                             </div>
 
                           </div>

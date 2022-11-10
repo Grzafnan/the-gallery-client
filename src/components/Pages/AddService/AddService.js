@@ -46,7 +46,7 @@ const AddService = () => {
 
 
     if (name) {
-      axios.post(`http://localhost:5000/services`,
+      axios.post(`https://the-gallery-server.vercel.app/services`,
         service,
         {
           headers: {
