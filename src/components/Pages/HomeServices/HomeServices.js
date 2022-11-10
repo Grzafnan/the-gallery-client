@@ -22,7 +22,7 @@ const HomeServices = () => {
     setLoading(true)
     axios.get('https://the-gallery-server.vercel.app/home-services')
       .then(res => {
-        setServices(res.data.data);
+        setServices(res?.data?.data);
         setLoading(false)
       })
       .catch(err => console.log(err));
@@ -34,7 +34,6 @@ const HomeServices = () => {
 
   return (
     <>
-
       {
         loading ? (
           <Loader />

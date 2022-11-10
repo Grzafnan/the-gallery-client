@@ -65,7 +65,7 @@ const Reviews = ({ serviceName }) => {
           setReviewCount(res?.data?.data?.length);
         }
         else {
-          toast.error(`Could not get review for ${id}`);
+          console.log("Couldn't find Data");
         }
       })
       .catch(err => {
@@ -108,11 +108,9 @@ const Reviews = ({ serviceName }) => {
                                         {review?.reviewDate}
                                       </p>
                                     </div>
-                                    <img src={review?.photoUrl} className='w-16 rounded-full' alt={review?.name} role="img" />
+                                    <img src={review?.photoUrl} className='w-16 h-16 rounded-full' alt={review?.name} role="img" />
                                   </div>
                                 </div>
-
-
                               </li>)
                             )
                           }

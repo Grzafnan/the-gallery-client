@@ -98,7 +98,7 @@ const Header = () => {
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
                   {/* Profile dropdown */}
-                  <Menu as="div" className="relative ml-3">
+                  <Menu as="div" className="relative ml-3 ">
                     <div>
                       <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="sr-only">Open user menu</span>
@@ -119,13 +119,13 @@ const Header = () => {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Items className="absolute right-0 z-10 mt-2 min-w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none p-[4px]">
                         <Menu.Item>
 
                           <NavLink
                             alt='Profile'
                             to="/profile"
-                            className={({ isActive }) => isActive ? 'hover:bg-gray-200 block bg-gray-200 px-4 py-2 text-sm text-gray-900' : 'block px-4 py-2 text-sm text-gray-900'}
+                            className={({ isActive }) => isActive ? 'hover:bg-gray-200 block bg-gray-200 px-4 py-2 text-sm text-gray-900 rounded-md' : ' hover:bg-gray-200 block px-4 py-2 text-sm text-gray-900 rounded-md'}
                           >
                             Your Profile
                           </NavLink>
@@ -136,7 +136,7 @@ const Header = () => {
                           <NavLink
                             to=""
                             alt='Settings'
-                            className={({ isActive }) => isActive ? 'hover:bg-gray-200 bg-gray-200 block px-4 py-2 text-sm text-gray-900' : 'block px-4 py-2 text-sm text-gray-900'}
+                            className={({ isActive }) => isActive ? 'hover:bg-gray-200 bg-gray-200 block px-4 py-2 text-sm text-gray-900 rounded-md' : ' hover:bg-gray-200 block px-4 py-2 text-sm text-gray-900 rounded-md'}
                           >
                             {
                               user?.email ? user.email : 'No email available'
@@ -149,7 +149,7 @@ const Header = () => {
                           {
                             user && user?.uid ? <>
                               <button onClick={logOut}
-                                className='px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 w-full text-start'
+                                className='px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 w-full text-start rounded-md'
                               >
                                 Sign out
                               </button>
@@ -158,7 +158,7 @@ const Header = () => {
                               <>
                                 <Link to='/login'>
                                   <button
-                                    className='px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 w-full text-start'
+                                    className='px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 w-full text-start rounded-md'
                                   >
                                     Sign in
                                   </button>
