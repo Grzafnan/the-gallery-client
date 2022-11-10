@@ -40,6 +40,8 @@ const Header = () => {
         <NavLink to='/add-service' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
 
         }> Add Service</NavLink>
+
+        <button onClick={logOut} className=' btn outline outline-2 transition-all ease-in-out hover:text-white hover:bg-gray-900 outline-gray-900 text-gray-900 px-3 py-[6px] rounded-md text-md font-medium block lg:inline-block'> Log Out </button>
       </>
         :
         <NavLink to='/login' className={({ isActive }) => isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block' : 'text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-md font-medium block lg:inline-block'
@@ -119,7 +121,7 @@ const Header = () => {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 min-w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none p-[4px]">
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none p-[4px]">
                         <Menu.Item>
 
                           <NavLink
@@ -134,12 +136,12 @@ const Header = () => {
                         <Menu.Item>
 
                           <NavLink
-                            to=""
+                            to="#"
                             alt='Settings'
-                            className={({ isActive }) => isActive ? 'hover:bg-gray-200 bg-gray-200 block px-4 py-2 text-sm text-gray-900 rounded-md' : ' hover:bg-gray-200 block px-4 py-2 text-sm text-gray-900 rounded-md'}
+                            className={({ isActive }) => isActive ? 'hover:bg-gray-200 bg-gray-200 my-1 block px-4 py-2 text-sm text-gray-900 rounded-md' : ' hover:bg-gray-200 block px-4 py-2 text-sm text-gray-900 rounded-md my-1'}
                           >
                             {
-                              user?.email ? user.email : 'No email available'
+                              user?.email ? user.email : 'No User Email'
                             }
                           </NavLink>
 
