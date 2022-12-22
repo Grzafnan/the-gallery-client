@@ -11,7 +11,20 @@ import useTitle from '../../../hooks/useTitle';
 
 const AddService = () => {
   const [ratings, setRatings] = useState(null);
-  const { loading } = useContext(AuthContext);
+  // const { loading } = useContext(AuthContext);
+
+  const [loading, setLoading] = useState(false);
+
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
+
+
+
 
   useTitle('Add Service')
 
@@ -80,8 +93,7 @@ const AddService = () => {
           <Loader />
         )
           :
-          <>
-            (
+          (
             <section className='py-10'>
               <h1 className='text-center capitalize font-semibold py-4 font-serif text-blue-600 text-3xl md:text-4xl '>Add a Service </h1>
               <div className="relative mx-auto max-w-screen-2xl">
@@ -189,10 +201,8 @@ const AddService = () => {
                 </div>
               </div>
             </section>
-            )
-          </>
+          )
       }
-
     </>
   );
 };

@@ -4,7 +4,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import SwiperCore, { Autoplay } from "swiper";
-import './Banner.css'
+
+// import './banner.module.css'
+
+import classes from './banner.module.css';
 
 import image1 from '../../../assets/img1.jpg'
 import image2 from '../../../assets/img2.jpg'
@@ -14,10 +17,29 @@ import image3 from '../../../assets/img3.jpg'
 
 const Banner = () => {
   SwiperCore.use([Autoplay])
+
   return (
     <>
-      <Swiper autoplay={{ delay: 3000 }} navigation={true} modules={[Navigation]} className="mySwiper">
-        <SwiperSlide className="relative">
+      <Swiper
+        autoplay={{ delay: 3000 }}
+        navigation={true}
+        modules={[Navigation]}
+        breakpoints={{
+          // when window width is >= 640px
+          640: {
+            width: 640,
+            slidesPerView: 1,
+          },
+          // when window width is >= 768px
+          768: {
+            width: 768,
+            slidesPerView: 1,
+          },
+        }}
+        className="" >
+        {/* {classes["mySwiper", "swiper"]} */}
+        {/* {classes["relative", "swiper-slide"]} */}
+        <SwiperSlide className="">
           <img className="w-full " src={image1} alt="" />
           <div className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-center">
             <h3 className="md:text-4xl lg:text-6xl text-gray-100 font-bold font-serif">

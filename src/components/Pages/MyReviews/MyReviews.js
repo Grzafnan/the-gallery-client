@@ -16,17 +16,18 @@ const MyReviews = () => {
 
   useTitle('My Reviews');
 
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 500);
+  // }, []);
+
 
 
   useEffect(() => {
     if (!user?.email) return;
-    // setLoading(true);
+    setLoading(true);
     fetch(`https://the-gallery-server.vercel.app/my-reviews?email=${user?.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('aceessToken')}`,
@@ -39,11 +40,14 @@ const MyReviews = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data.data);
+        // console.log(data.data);
         setReviews(data.data);
         setLoading(false);
       });
   }, [user?.email, logOut, refresh])
+
+
+
 
 
 
@@ -87,7 +91,6 @@ const MyReviews = () => {
 
   return (
     <>
-
       {
         loading ? (
           <Loader />

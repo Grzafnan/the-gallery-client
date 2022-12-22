@@ -10,11 +10,8 @@ import { jwtVerify } from '../Shared/JwtVerify/JwtVerify';
 import Loader from '../Utilities/Loader';
 
 const Login = () => {
-  const [loader, setLoader] = useState(false);
-
   useTitle('Login');
-
-  const { singIn, signInWithProvider, setLoading } = useContext(AuthContext);
+  const { singIn, signInWithProvider } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
   const location = useLocation();
@@ -22,13 +19,14 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
 
 
+  const [loader, setLoader] = useState(false);
+
   useEffect(() => {
     setLoader(true);
     setTimeout(() => {
       setLoader(false);
-    }, 500);
+    }, 1000);
   }, []);
-
 
 
   const handelSingIn = (e) => {
@@ -44,11 +42,14 @@ const Login = () => {
         const currentUser = {
           email: user.email
         };
-        jwtVerify(currentUser)
-        toast.success('Log in Success', { autoClose: 1000 });
-        navigate(from, { replace: true });
+        axios.post(`https://the-gallery-server.vercel.app/jwt`, currentUser)
+          .then(res => {
+            // console.log(res.data.token);
+            localStorage.setItem('aceessToken', res.data.token);
+            toast.success('Log in Success', { autoClose: 1000 });
+            navigate(from, { replace: true });
+          })
       })
-
 
       // ...
       .catch((error) => {
@@ -56,9 +57,6 @@ const Login = () => {
         const errorMessage = error.message;
         console.error(errorMessage);
         toast.error(errorMessage, { autoClose: 500 });
-      })
-      .finally(() => {
-        setLoading(false)
       })
   }
 
@@ -68,13 +66,17 @@ const Login = () => {
       .then((result) => {
         // The signed-in user info.
         const user = result.user;
-        console.log(user);
+
         const currentUser = {
           email: user.email
         };
-        jwtVerify(currentUser)
-        toast.success('Login Success')
-        navigate(from, { replace: true });
+        axios.post(`https://the-gallery-server.vercel.app/jwt`, currentUser)
+          .then(res => {
+            // console.log(res.data.token);
+            localStorage.setItem('aceessToken', res.data.token);
+            toast.success('Log in Success', { autoClose: 1000 });
+            navigate(from, { replace: true });
+          })
         // ...
       }).catch((error) => {
         // Handle Errors here.
@@ -83,9 +85,7 @@ const Login = () => {
         console.error(errorMessage);
         toast.error(errorMessage, { autoClose: 500 });
       })
-      .finally(() => {
-        setLoading(false)
-      })
+
   }
 
 
@@ -97,19 +97,18 @@ const Login = () => {
         const currentUser = {
           email: user.email
         };
-        jwtVerify(currentUser)
-        toast.success('Login Success')
-        navigate(from, { replace: true });
-        console.log(user);
-
+        axios.post(`https://the-gallery-server.vercel.app/jwt`, currentUser)
+          .then(res => {
+            // console.log(res.data.token);
+            localStorage.setItem('aceessToken', res.data.token);
+            toast.success('Log in Success', { autoClose: 1000 });
+            navigate(from, { replace: true });
+          })
         //...
       })
       .catch((error) => {
         console.error(error.message);
         toast.error(error.message, { autoClose: 500 });
-      })
-      .finally(() => {
-        setLoading(false)
       })
   }
 
