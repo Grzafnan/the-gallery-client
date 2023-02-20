@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -7,7 +7,6 @@ import SwiperCore, { Autoplay } from "swiper";
 
 // import './banner.module.css'
 
-import classes from './banner.module.css';
 
 import image1 from '../../../assets/img1.jpg'
 import image2 from '../../../assets/img2.jpg'
@@ -17,30 +16,35 @@ import image3 from '../../../assets/img3.jpg'
 
 const Banner = () => {
   SwiperCore.use([Autoplay])
+  const pagination = {
+    clickable: true
+  }
+
 
   return (
-    <>
+    <section className="w-[95%] mx-auto">
       <Swiper
         autoplay={{ delay: 3000 }}
+        loop={true}
+        speed={1000}
         navigation={true}
         modules={[Navigation]}
+        pagination={pagination}
         breakpoints={{
           // when window width is >= 640px
-          640: {
-            width: 640,
+          414: {
+            // width: 414,
             slidesPerView: 1,
           },
           // when window width is >= 768px
-          768: {
-            width: 768,
+          896: {
+            // width: 896,
             slidesPerView: 1,
           },
         }}
-        className="" >
-        {/* {classes["mySwiper", "swiper"]} */}
-        {/* {classes["relative", "swiper-slide"]} */}
+      >
         <SwiperSlide className="">
-          <img className="w-full " src={image1} alt="" />
+          <img className="w-full  h-[50vh] lg:h-[80vh] " src={image1} alt="" />
           <div className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-center">
             <h3 className="md:text-4xl lg:text-6xl text-gray-100 font-bold font-serif">
               Wedding in Dhaka
@@ -54,7 +58,7 @@ const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide className="relative">
-          <img className="w-full " src={image2} alt="" />
+          <img className="w-full h-[50vh] lg:h-[80vh]" src={image2} alt="" />
           <div className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-center">
             <h3 className="md:text-4xl lg:text-6xl text-gray-100 font-bold font-serif">
               My Personal Work
@@ -68,7 +72,7 @@ const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide className="relative">
-          <img className="w-full " src={image3} alt="" />
+          <img className="w-full h-[50vh] lg:h-[80vh]" src={image3} alt="" />
           <div className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-center">
             <h3 className="md:text-4xl lg:text-6xl text-gray-100 font-bold font-serif">
               Discover My Portfolio
@@ -83,7 +87,7 @@ const Banner = () => {
         </SwiperSlide>
       </Swiper>
 
-    </>
+    </section>
   );
 };
 

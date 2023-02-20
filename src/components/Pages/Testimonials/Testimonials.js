@@ -23,7 +23,8 @@ const Testimonials = () => {
           <Swiper
             loop={true}
             slidesPerView={1}
-            autoplay={{ delay: 1500 }}
+            autoplay={{ delay: 2000 }}
+            speed={1000}
             navigation={
               {
                 nextEl: '.next-button',
@@ -31,7 +32,7 @@ const Testimonials = () => {
               }
             }
             pagination={pagination}
-            modules={[Navigation, Pagination]}
+            modules={[Navigation, Pagination, Autoplay]}
           >
             <SwiperSlide>
               <main className="relative z-20 w-full mt-8 md:flex md:items-center xl:mt-12">
@@ -49,13 +50,13 @@ const Testimonials = () => {
                     <p className="mt-4 text-lg leading-relaxed text-white md:text-xl"> “Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad tempora doloribus expedita laborum saepe voluptas perferendis delectus assumenda”.</p>
 
                     <div className="flex items-center justify-between mt-6 md:justify-start">
-                      <button title="left arrow" className="prev-button p-2 text-white transition-colors duration-300 border rounded-full rtl:-scale-x-100 hover:bg-blue-400">
+                      <button className="prev-button p-2 text-white transition-colors duration-300 border rounded-full rtl:-scale-x-100 hover:bg-blue-400">
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                         </svg>
                       </button>
 
-                      <button title="right arrow" className="next-button p-2 text-white transition-colors duration-300 border rounded-full rtl:-scale-x-100 md:mx-6 hover:bg-blue-400">
+                      <button className="next-button p-2 text-white transition-colors duration-300 border rounded-full rtl:-scale-x-100 md:mx-6 hover:bg-blue-400">
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                         </svg>
